@@ -1,0 +1,100 @@
+------------------- JDBC Swing User thake(insert,update,delete,select) input nibe---------------------------------
+
+-------------------------------------  Insert  -----------------------------------------
+
+    private void insertActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        try {
+         Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+   PreparedStatement ps = c1.prepareStatement("INSERT INTO abc(id,name,address,round)VALUES(" + tx1.getText() + ",'" + tx2.getText() + "','" + tx3.getText() + "'," + tx4.getText() + ")");
+            ps.executeUpdate();
+            System.out.println("Insert successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    } 
+----------------------------------- Update ----------------------------------------------------------------------------                                     
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+PreparedStatement ps = c1.prepareStatement("update abc set name='" + tx2.getText() + "' , address='" + tx3.getText() + "',round=" + tx4.getText() + " where id=" + tx1.getText() + "");
+            ps.executeUpdate();
+            System.out.println("Update successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }                                      
+-----------------------------------  Delete ----------------------------------------------------------------------------
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("delete from abc where id=" + tx1.getText() + "");
+            ps.executeUpdate();
+            System.out.println("delete successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    } 
+
+-----------------------------------  Select ----------------------------------------------------------------------------                                     
+
+    private void showActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("select * from abc where id=" + tx7.getText() + "");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int x = rs.getInt(1);
+                String y = rs.getString(2);
+                String z = rs.getString(3);
+                int w = rs.getInt(4);
+                System.out.println(x + " " + y + " " + z + " " + w);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }                                    
+
+-----------------------------------  Condition ----------------------------------------------------------------------------
+
+    private void conditionActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("select name,address from abc where id=" + tx5.getText() + "");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String x = rs.getString(1);
+                String y = rs.getString(2);
+                System.out.println(x + " " + y);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }                                         
+----------------------------------- insert SetString diya o kora jai ------------------------------------------------------------
+
+           ------------ ababe korbo na--------------------
+
+             PreparedStatement ps = c1.prepareStatement("INSERT INTO abc(id,name,address,round)VALUES(?,?,?,?)");
+             //setInt dila --- parseInt dita hoba
+
+             //ps.setInt(1, Integer.parseInt(tx1.getText()));
+            //ps.setString(1,tx1.getText());
+            ps.setString(2, tx2.getText());
+            ps.setString(3, tx3.getText());
+            ps.setString(4, tx4.getText());
+			 
+-----------------------------------------------  THE END --------------------------------------------------------
+
+
+
+
+
+
+
