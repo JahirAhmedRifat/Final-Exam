@@ -1,0 +1,234 @@
+------------------------------ JDBC insert/update/delete/select Kora -------------------------------------------
+package Table;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Input {
+
+    public static void main(String[] args) {
+        //insert();  
+        //update();
+        //delete();
+        //select();
+        condition();
+    }
+
+    public static void insert() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("INSERT INTO info(id,name,email)VALUES(125,'Asad','123@gmail.com')");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void update() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("UPDATE info SET name='Asik' WHERE id=125");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void delete() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("DELETE FROM info WHERE id=115");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void select() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("SELECT * FROM info");
+            ResultSet rs = ps.executeQuery();
+            //---------------- just sajanor jonna -------------------
+            System.out.println("ID " + " " + "Name" + " " + "Email   ");
+            System.out.println("---" + " " + "----" + " " + "--------");
+            
+            while (rs.next()) {
+                int x = rs.getInt(1);
+                String y = rs.getString(2);
+                String z = rs.getString(3);
+                
+                System.out.println(x + " " + y + " " + z);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public static void condition() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("SELECT * FROM info WHERE id>105 AND name='asik' ");
+            ResultSet rs = ps.executeQuery();
+            //---------------- just sajanor jonna -------------------
+            System.out.println("ID " + " " + "Name" + " " + "Email   ");
+            System.out.println("---" + " " + "----" + " " + "--------");
+            while (rs.next()) {
+                // akta record/row er all data chaile --- rs.next();   --------------------------
+                int x = rs.getInt(1);
+                String y = rs.getString(2);
+                String z = rs.getString(3);
+                
+                System.out.println(x + " " + y + " " + z);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+---------------------------------------------- Extra information  ---------------------------------------------------
+        //------------------Akadik data insert kora ak sathe  --------------------------
+
+    public static void insert() {
+        try {
+           Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("INSERT INTO info(id,name,email,round)VALUES(101,'Jahir','Jahir@gmail.com',57)");
+            ps.executeUpdate();
+
+            PreparedStatement ps1 = c1.prepareStatement("INSERT INTO info(id,name,email,round)VALUES(102,'Kamal','Jahir@gmail.com',57)");
+            ps1.executeUpdate();
+
+            PreparedStatement ps2 = c1.prepareStatement("INSERT INTO info(id,name,email,round)VALUES(103,'Asil','Jahir@gmail.com',57)");
+            ps2.executeUpdate();
+
+            PreparedStatement ps3 = c1.prepareStatement("INSERT INTO info(id,name,email,round)VALUES(104,'Sadia','Jahir@gmail.com',57)");
+            ps3.executeUpdate();
+
+            System.out.println("Insert successfully");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+   //------------------Akadik data update kora ak sathe  --------------------------
+    public static void update() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("update info set email='123@gmail.com',name='Sajid' where id=103");
+            ps.executeUpdate();
+            PreparedStatement ps1 = c1.prepareStatement("update info set email='asxcd@gmail.com',name='sakila' where id=104");
+            ps1.executeUpdate();
+            System.out.println("update successfully");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+   //------------------Akadik data delete kora ak sathe  --------------------------
+    public static void delete() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("delete from info where id=104");
+            ps.executeUpdate();
+            PreparedStatement ps1 = c1.prepareStatement("delete from info where id=103");
+            ps1.executeUpdate();
+            System.out.println("delete successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+   //------------------Akadik data select kora ak sathe  --------------------------
+
+    public static void select() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("select id,name,round from info");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt(1);
+                String y = rs.getString(2);               
+                int s= rs.getInt(3);
+                System.out.println(x+" "+y+" "+s);
+            }          
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+   //------------------Akadik data condition kora ak sathe  --------------------------
+    public static void condition() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("select * from info where name='Jahir'");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt(1);
+                String y = rs.getString(2);
+                String z = rs.getString(3);
+                int s= rs.getInt(4);
+                System.out.println(x);
+            }           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+//----------------------------------------------------------------------------------
+   public static void condition() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/xyz", "root", "nclc123456");
+
+            PreparedStatement ps = c1.prepareStatement("select email from info where name='Jahir' And id=105");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {            
+                String y = rs.getString(1);              
+                System.out.println(y);
+            }           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
