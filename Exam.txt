@@ -1,0 +1,72 @@
+                        **************** Final File *************************
+------------------------------------------------------------------------------------------
+package xyz;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class abc {
+
+    public static void main(String[] args) {
+        insert();
+        update();
+        query();
+        delete();
+    }
+//    -------------------------- insert-------------------------
+
+    public static void insert() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("insert into student(id,name,address,round)values(100,'Jahir','Mirpur',57)");
+            ps.executeUpdate();
+            System.out.println("Successfully added");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    //  ----------------------------- update ------------------------------
+    public static void update() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("update student set name='Kamal' where id=100");
+            ps.executeUpdate();
+            System.out.println("Successfully updated");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    //  ----------------------------- Query------------------------------
+    public static void query() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("select id,name,round,address from student");
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                int id=rs.getInt(1);
+                String name=rs.getString(2);
+                String adr=rs.getString(4);
+                int round=rs.getInt(3);
+                System.out.println(id+"\t"+name+"\t"+round+"\t"+adr);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    //  ----------------------------- delete ------------------------------
+    public static void delete() {
+        try {
+            Connection c1 = DriverManager.getConnection("jdbc:mysql://localhost/stdb", "root", "nclc123456");
+            PreparedStatement ps = c1.prepareStatement("delete from student where id=100");
+            ps.executeUpdate();
+            System.out.println("Successfully deleted");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+---------------------------------------------- THE END ---------------------------------------------------------
